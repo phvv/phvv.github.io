@@ -1,88 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preston Vander Vos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #2d3748;
-        }
-
-        .bio {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            color: #4a5568;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 2px solid #4a5568;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: #4a5568;
-            color: white;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        figcaption { background-color: rgba(29, 41, 53, 0.75); } /* Semi-transparent dark bg for dark mode captions */
+        .dark figcaption { background-color: rgba(29, 41, 53, 0.75); }
+        html.light figcaption { background-color: rgba(255, 255, 255, 0.75); } /* Semi-transparent light bg for light mode captions */
     </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    colors: {
+                        'base-100': '#1f2937', // Dark BG
+                        'base-200': '#374151', // Dark Panel
+                        'accent': '#6ee7b7',   // Dark Accent
+                        'accent-light': '#10b981', // Light Accent
+                    },
+                }
+            }
+        }
+    </script>
+    <script>
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.remove('dark')
+          document.documentElement.classList.add('light')
+        } else {
+          document.documentElement.classList.add('dark')
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Preston Vander Vos</h1>
-            <p>Software Developer</p>
-        </header>
+<body class="bg-white dark:bg-base-100 text-gray-800 dark:text-gray-300 transition-colors duration-300">
 
-        <section class="bio">
-            <h2>About Me</h2>
-            <p>
-                Hello!
-            </p>
-        </section>
+    <div class="flex flex-col md:flex-row max-w-7xl mx-auto">
+        <aside class="md:w-1/3 lg:w-1/4 md:h-screen md:sticky top-0 p-8 bg-gray-100 dark:bg-base-200 shadow-lg transition-colors duration-300">
+            <div class="flex flex-col items-center md:items-start space-y-6">
+                <img class="w-48 h-48 rounded-full mx-auto md:mx-0" src="assets/images/profile.jpg" alt="Profile picture of Me">
 
-        <div class="social-links">
-            <a href="https://github.com/phvv" target="_blank">GitHub</a>
-            <a href="https://linkedin.com/in/phvv" target="_blank">LinkedIn</a>
-        </div>
+                <div class="text-center md:text-left">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Preston Vander Vos</h1>
+                    <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">pvandervos [at] proton [dot] me</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-2">
+                    <a href="https://github.com/phvv" target="_blank" rel="noopener noreferrer" title="GitHub" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.65.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/phvv/" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="assets/documents/resume.pdf" download="PrestonVanderVos-Resume.pdf" title="Download Resume" class="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 9V3.5L19.5 9H14z"/>
+                          </svg>
+                        <span class="text-base font-medium">Resume</span>
+                    </a>
+                </div>
+
+                <nav class="flex flex-col space-y-2 mt-8 text-lg w-full">
+                    <a href="#about" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">About Me</a>
+                    <a href="#education" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">Education</a>
+                    <a href="#experience" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">Work Experience</a>
+                    <a href="#projects" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">Projects</a>
+                    <a href="#publications" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">Publications</a>
+                    <a href="#talks" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">Talks</a>
+                    <a href="#interests" class="text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">Interests</a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="relative md:w-2/3 lg:w-3/4 p-8 md:p-12">
+            <div class="absolute top-8 right-8">
+                <button id="theme-toggle" type="button" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-light dark:focus:ring-offset-base-100 dark:focus:ring-accent transition-all duration-300">
+                    <span class="sr-only">Toggle theme</span>
+                    <svg id="theme-toggle-sun-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" stroke-width="2"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3" stroke-width="2"></line>
+                        <line x1="12" y1="21" x2="12" y2="23" stroke-width="2"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke-width="2"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke-width="2"></line>
+                        <line x1="1" y1="12" x2="3" y2="12" stroke-width="2"></line>
+                        <line x1="21" y1="12" x2="23" y2="12" stroke-width="2"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke-width="2"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke-width="2"></line>
+                      </svg>
+                    <svg id="theme-toggle-moon-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+            </div>
+
+            <section id="about" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">About Me</h2>
+                <p class="text-lg leading-relaxed">
+                    My career is driven by a passion for everything cryptocurrency related. After starting my career in TradFi trading at <a href="https://www.rbc.com/" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">RBC</a>, I transitioned fully into crypto, applying my analytical skills at top-tier firms including <a href="https://www.bitmex.com/" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">BitMEX</a>, <a href="https://www.paradigm.co/" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">Paradigm</a>, and <a href="https://www.chainalysis.com/" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">Chainalysis</a>.  My work has spanned from building AML monitoring systems and fine-tuning ML models for trading products to investigating on-chain forensic cases for government agencies. 
+                </p>
+                <p class="text-lg leading-relaxed mt-4">
+                    My passion for crypto began at <a href="https://www.cmu.edu/" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">Carnegie Mellon</a>, where I took every available class on the subject, attended conferences, and joined the university's blockchain club.  Today, I'm building on that foundation as an MSc candidate in Information Security at <a href="https://www.ucl.ac.uk/" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">UCL</a>, where I'm focusing on cryptography and conducting research.  I'm eager to contribute to a team at the frontier of the crypto, tackling complex technical challenges and advancing cutting-edge research.
+                </p>
+            </section>
+
+            <section id="education" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">Education</h2>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">MSc Candidate in Information Security</h3>
+                        <p class="text-gray-600 dark:text-gray-400">University College London | 2024 - 2025</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">BS in Business Administration, Minor in Computer Science</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Carnegie Mellon University | 2016 - 2020</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">Work Experience</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Associate Data Scientist, Chainalysis</h3>
+                        <p class="text-gray-600 dark:text-gray-400">New York, NY | 2024</p>
+                        <!-- <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700 dark:text-gray-300">
+                            <li>bullet 1</li>
+                            <li>bullet 2</li>
+                        </ul> -->
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Associate Product Manager, Paradigm</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Singapore | 2023</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Senior Data Analyst, BitMEX</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Vancouver, BC | 2022</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Municipal Derivatives Trading Analyst, RBC Capital Markets</h3>
+                        <p class="text-gray-600 dark:text-gray-400">New York, NY | 2020 - 2021</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">Projects</h2>
+                <div class="mt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Select UCL Projects</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex items-center gap-x-3">
+                               <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100"><a href="https://github.com/filippos-alexandros/Encode24" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent-light dark:text-accent">BASED Legacy</a></h4>
+                               <span class="text-xs font-semibold inline-flex items-center px-2.5 py-0.5 rounded-full bg-yellow-200 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                                   🏆 Encode London 2024 Hackathon Winner
+                               </span>
+                            </div>
+                           <p class="mt-1 text-gray-700 dark:text-gray-300">A dApp for automated, rule-based legacy planning to distribute assets and bypass probate court</p>
+                       </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100"><a href="https://github.com/Ethan-000/defi_mooc_lab2" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent-light dark:text-accent">Flash Loan based Liquidation</a></h4>
+                            <p class="mt-1 text-gray-700 dark:text-gray-300">Implemented a smart contract to perform flash loan based liquidations on the Aave protocol</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100"><a href="https://github.com/MKhalil01/pokemondapp" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent-light dark:text-accent">Pokémon NFT Trading dApp</a></h4>
+                            <p class="mt-1 text-gray-700 dark:text-gray-300">Developed a decentralized application for trading Pokémon card NFTs with a focus on security</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Privacy Enchancing Technologies labs</h4>
+                            <p class="mt-1 text-gray-700 dark:text-gray-300">Mixnets & Traffic Analysis, Additive Homomorphic Encryption, Zero-Knowledge Proofs, Anonymous Credentials, Private Set Intersection</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="mt-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Select CMU Projects</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Artificial Intelligence labs</h4>
+                            <p class="mt-1 text-gray-700 dark:text-gray-300"><a href="https://ai.berkeley.edu/multiagent.html" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">Multi-Agent Search</a>, <a href="https://ai.berkeley.edu/reinforcement.html" target="_blank" rel="noopener noreferrer" class="text-accent-light dark:text-accent hover:underline">Reinforcement Learning</a>, fine-tuning Convolutional Neural Networks, Naieve Bayes classifiers</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-100"><a href="https://github.com/phvv/15-112-term-project" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent-light dark:text-accent">Color Vision Deficiency Aid</a> (15-112 Term Project)</h4>
+                            <p class="mt-1 text-gray-700 dark:text-gray-300">Created an application to aid people with color vision deficiency through diagnostic tests and image analysis tools</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="publications" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">Publications</h2>
+                <p>Papers currently in preparation. This section will be updated upon submission.</p>
+            </section>
+
+            <section id="talks" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">Talks</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Technical Approach for Tracing Approval Phishing</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Trace DC, Washington DC | 2024</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="interests" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-4 text-gray-900 dark:text-white">Interests</h2>
+                <p class="text-lg leading-relaxed">
+                    Beyond my work in crypto, I enjoy challenges that engage both my mind and body. I have a mild obsession with board and card games and am always down to learn new ones. On the physical side, I've been a competitive swimmer my entire life, never pass up a good hike, and recently added rock climbing to the mix.
+                </p>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <figure class="relative rounded-lg overflow-hidden shadow-lg">
+                        <img src="assets/images/climbing.jpg" alt="Me climbing" class="w-full h-full object-cover">
+                        <figcaption class="absolute bottom-0 left-0 w-full p-2 text-center text-sm text-gray-800 dark:text-white transition-colors duration-300">
+                            Hang tight 🤙
+                        </figcaption>
+                    </figure>
+                    <figure class="relative rounded-lg overflow-hidden shadow-lg">
+                        <img src="assets/images/preston.jpg" alt="Preston" class="w-full h-full object-cover">
+                        <figcaption class="absolute bottom-0 left-0 w-full p-2 text-center text-sm text-gray-800 dark:text-white transition-colors duration-300">
+                            Preston-ception
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+        </main>
     </div>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('theme-toggle-sun-icon');
+        const moonIcon = document.getElementById('theme-toggle-moon-icon');
+
+        function setIconVisibility() {
+            if (document.documentElement.classList.contains('dark')) {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } 
+            else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        // Set initial icon visibility on page load
+        setIconVisibility();
+
+        themeToggleBtn.addEventListener('click', () => {
+            // Toggle the 'dark' class on the <html> element
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+
+            // Update localStorage with the new theme preference
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+
+            // Update the icon visibility after the toggle
+            setIconVisibility();
+        });
+    </script>
 </body>
 </html>
