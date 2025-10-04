@@ -1,1 +1,1 @@
-Personal website found at [pvandervos.com](https://pvandervos.com/)
+Personal website: [pvandervos.com](https://pvandervos.com/)
