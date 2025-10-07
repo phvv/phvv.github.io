@@ -123,6 +123,114 @@ def generate_post_html(metadata, html_content):
 </body>
 </html>'''
 
+def generate_blog_listing(posts):
+    """Generate the blog.html listing page with all posts."""
+    # Sort posts by date (most recent first)
+    sorted_posts = sorted(posts, key=lambda p: p['date'], reverse=True)
+
+    # Generate article HTML for each post
+    articles_html = []
+    for post in sorted_posts:
+        article = f'''<article class="blog-card border-b border-gray-200 dark:border-gray-700 pb-8" onclick="window.location.href='blog/{post['slug']}.html'">
+                        <div class="mb-4">
+                            <h2 class="text-2xl font-bold mb-2">
+                                <a href="blog/{post['slug']}.html" class="blog-title text-gray-900 dark:text-white transition-colors duration-300">
+                                    {post['title']}
+                                </a>
+                            </h2>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">{format_date(post['date'])}</p>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            {post['excerpt']}
+                        </p>
+                    </article>'''
+        articles_html.append(article)
+
+    articles_section = '\n\n                    '.join(articles_html)
+
+    return f'''<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Preston Vander Vos</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="assets/icons/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style>
+        body {{ font-family: 'Inter', sans-serif; }}
+        .blog-card {{
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }}
+        .blog-card:hover {{
+            transform: translateY(-2px);
+        }}
+        .blog-card:hover .blog-title {{
+            color: #10b981 !important;
+        }}
+        .dark .blog-card:hover .blog-title {{
+            color: #6ee7b7 !important;
+        }}
+    </style>
+    <script>
+        tailwind.config = {{
+            darkMode: 'class',
+            theme: {{
+                extend: {{
+                    colors: {{
+                        'base-100': '#1f2937',
+                        'base-200': '#374151',
+                        'accent': '#6ee7b7',
+                        'accent-light': '#10b981',
+                    }},
+                }}
+            }}
+        }}
+    </script>
+    <script>
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {{
+          document.documentElement.classList.remove('dark')
+          document.documentElement.classList.add('light')
+        }} else {{
+          document.documentElement.classList.add('dark')
+        }}
+    </script>
+    <meta property="og:title" content="Blog | Preston Vander Vos">
+    <meta property="og:description" content="My musings">
+    <meta property="og:url" content="https://pvandervos.com/blog">
+    <meta property="og:type" content="website">
+</head>
+<body class="bg-white dark:bg-base-100 text-gray-800 dark:text-gray-300 transition-colors duration-300" data-page="blog">
+    <script src="../layout.js"></script>
+    <script>
+        const mainContent = `
+            <section class="mb-16">
+                <h1 class="text-4xl font-bold border-b-2 border-accent-light dark:border-accent pb-2 mb-6 text-gray-900 dark:text-white">Blog</h1>
+
+                <div class="bg-gray-50 dark:bg-base-200 rounded-lg p-4 mb-8">
+                    <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+                        All opinions are mine. AI was not used to write any post.
+                    </p>
+                </div>
+
+                <div class="space-y-8">
+                    {articles_section}
+                </div>
+            </section>
+        `;
+
+        document.addEventListener('DOMContentLoaded', () => {{
+            loadLayout(mainContent);
+        }});
+    </script>
+</body>
+</html>'''
+
 def process_markdown_file(filepath):
     """Process a single markdown file and generate HTML."""
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -150,7 +258,7 @@ def process_markdown_file(filepath):
     return metadata
 
 def build_blog():
-    """Main function to build all blog posts."""
+    """Main function to build all blog posts and update blog.html."""
     posts_dir = Path('posts')
 
     if not posts_dir.exists():
@@ -170,6 +278,11 @@ def build_blog():
         metadata = process_markdown_file(md_file)
         posts.append(metadata)
 
+    blog_html = generate_blog_listing(posts)
+    with open('blog.html', 'w', encoding='utf-8') as f:
+        f.write(blog_html)
+
+    print(f'Generated: blog.html')
     print(f'Successfully generated {len(posts)} blog post(s)')
 
 if __name__ == '__main__':
