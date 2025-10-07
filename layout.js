@@ -1,7 +1,7 @@
 function loadLayout(mainContent = '') {
     const layout = `
         <div class="flex flex-col md:flex-row max-w-7xl mx-auto">
-            <aside class="md:w-1/3 lg:w-1/4 md:h-screen md:sticky top-0 p-8 bg-gray-100 dark:bg-base-200 shadow-lg transition-colors duration-300">
+            <aside class="md:w-1/3 lg:w-1/4 md:h-screen md:sticky top-0 p-8 bg-gray-100 dark:bg-base-200 shadow-lg transition-colors duration-300 md:overflow-y-auto">
                 <div class="flex flex-col items-center md:items-start space-y-6">
                     <a href="/index.html" title="Go to Home">
                         <img class="w-48 h-48 rounded-full mx-auto md:mx-0"
