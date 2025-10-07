@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odontoceti | Preston Vander Vos</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="../assets/icons/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .markdown-content h1 { font-size: 2.25rem; font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; }
+        .markdown-content h2 { font-size: 1.875rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .markdown-content h3 { font-size: 1.5rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+        .markdown-content p { margin-bottom: 1rem; line-height: 1.75; }
+        .markdown-content ul, .markdown-content ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
+        .markdown-content code { background: #f3f4f6; padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .dark .markdown-content code { background: #374151; }
+        .markdown-content pre { background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; }
+        .dark .markdown-content pre { background: #374151; }
+        .markdown-content pre code { background: transparent; padding: 0; }
+        .markdown-content blockquote { border-left: 4px solid #10b981; padding-left: 1rem; margin: 1rem 0; font-style: italic; }
+        .dark .markdown-content blockquote { border-left-color: #6ee7b7; }
+        .markdown-content a { color: #10b981; text-decoration: underline; }
+        .dark .markdown-content a { color: #6ee7b7; }
+        .markdown-content img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 1rem 0; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'base-100': '#1f2937',
+                        'base-200': '#374151',
+                        'accent': '#6ee7b7',
+                        'accent-light': '#10b981',
+                    },
+                }
+            }
+        }
+    </script>
+    <script>
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.remove('dark')
+          document.documentElement.classList.add('light')
+        } else {
+          document.documentElement.classList.add('dark')
+        }
+    </script>
+    <meta property="og:title" content="Odontoceti | Preston Vander Vos">
+    <meta property="og:description" content="At the heart of every blockchain is a consensus protocol. It’s how the network knows which block is next in the chain. ...">
+    <meta property="og:url" content="https://pvandervos.com/blog/odontoceti.html">
+    <meta property="og:type" content="article">
+</head>
+<body class="bg-white dark:bg-base-100 text-gray-800 dark:text-gray-300 transition-colors duration-300" data-page="blog-post">
+    <script src="../layout.js"></script>
+    <script>
+        const mainContent = `
+            <article class="mb-16">
+                <header class="mb-8 border-b-2 border-accent-light dark:border-accent pb-6">
+                    <a href="../blog.html" class="text-accent-light dark:text-accent hover:underline mb-4 inline-block">← Back to Blog</a>
+                    <h1 class="text-4xl font-bold mb-2 text-gray-900 dark:text-white">Odontoceti</h1>
+                    <div class="flex items-center gap-4 text-gray-500 dark:text-gray-400">
+                        <time>Oct 7, 2025</time>
+                    </div>
+                </header>
+
+                <div class="markdown-content text-gray-700 dark:text-gray-300">
+                    <p>At the heart of every blockchain is a consensus protocol. It’s how the network knows which <em>block</em> is next in the <em>chain</em>. These protocols face an inherent <a href="https://vitalik.eth.limo/general/2017/12/31/sharding_faq.html">trilemma</a> between scalability, security, and decentralization. In deciding what consensus protocol to use, each blockchain positions itself within the trilemma. For instance, Bitcoin’s Nakamoto consensus emphasizes security and decentralization at the expense of scalability.</p>
+<p><a href="https://arxiv.org/abs/2510.01216">Odontoceti</a>, the latest in DAG-based consensus, explores the impacts of trading off security for scalability. Specifically, it looks at the speed improvement that follows from reducing the theoretical fault tolerance (the proportion of bad actors a network can withstand) from 33 to 20%. It turns out the resulting protocol is extremely performant! Odontoceti achieves a median latency of 300 milliseconds (0.3 seconds) to finalize a transaction while processing 10,000 incoming transactions per second. Throughout testing, Odontoceti was 20-25% faster than its predecessor, which uses a 33% fault tolerance. Its predecessor, <a href="https://arxiv.org/abs/2310.14821">Mysticeti</a>, is currently used in production in Sui.</p>
+<h2>How does Odontoceti Work?</h2>
+<p>If you are unfamiliar with DAG-based consensus, please see Section 2.9 of the <a href="https://arxiv.org/abs/2510.01216">paper</a> for some background. Odontoceti, operating in a partially synchronous network, constructs an uncertified DAG, removing the costs of certifying each block before it enters the DAG. While this significantly reduces the messages required to make the DAG, it doesn’t attempt to solve the problem of equivocations (when a participant tries to enter conflicting blocks into the chain). Those are handled by Odontoceti’s decision rule.</p>
+<p>The core of the rule is committing a block when it receives support from 80% of participants. This resolves equivocations since two conflicting blocks won’t ever both gain support from 80% of participants. For the full decision rule including correctness proofs, please see the <a href="https://arxiv.org/abs/2510.01216">paper</a>.</p>
+<p><img src="../assets/images/blog/odontoceti-decision.jpg" alt="Odontoceti's decision rule" style="max-width: 500px; width: 100%;"></p>
+<p>The subtlety not highlighted yet is how simple this is. A participant broadcasts their block to the network and upon receiving support from enough peers, the block, along with all of its transactions, is committed. In consensus speak, this commitment takes two rounds. The first is the initial broadcast and the second is when peers support it. Consensus protocols that operate with a 20% fault tolerance are able to commit in two rounds. Protocols that operate with a 33% fault tolerance can only commit after three rounds. This is the heart behind why Odontoceti is so fast.</p>
+<h2>Testing Results</h2>
+<p>Below is a figure showing Odontoceti’s performance in networks of 10 and 50 participants under loads of 10,000 and 50,000 transactions per second. Latency is how quickly blocks are committed. This is equivalent to finalizing transactions and is displayed at the 50th (median) and 90th percentiles.</p>
+<p><img alt="Graph of Odontoceti's latency" src="../assets/images/blog/odontoceti-latency.png" /></p>
+<p>Odontoceti commits blocks in 300ms with 10 participants and a load of 10,000 transactions per second. With 50 participants and 50,000 transactions per second, median latency increases to 360ms. Tail behavior is reasonable with the 90th percentile lagging the median by no more than 100ms. The tests were conducted across machines spread around the globe, characteristic of distributed blockchains. Pings between machines were predominantly between 100 and 200ms.</p>
+<p>These results are 20-25% faster than Mysticeti. Thus, illustrating the practical performance benefits which arise from trading off fault tolerance. Currently, many blockchains, like Sui with Mysticeti, use a 33% fault tolerance. That may be shifting as Solana recently implemented the same trade off that Odontoceti makes with their new consensus protocol <a href="https://www.anza.xyz/alpenglow-1-1">Alpenglow</a>.</p>
+                </div>
+            </article>
+        `;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLayout(mainContent);
+        });
+    </script>
+</body>
+</html>

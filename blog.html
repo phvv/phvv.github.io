@@ -13,6 +13,19 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .blog-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-2px);
+        }
+        .blog-card:hover .blog-title {
+            color: #10b981 !important;
+        }
+        .dark .blog-card:hover .blog-title {
+            color: #6ee7b7 !important;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -39,7 +52,6 @@
     </script>
     <meta property="og:title" content="Blog | Preston Vander Vos">
     <meta property="og:description" content="My musings">
-    <meta property="og:image" content="https://pvandervos.com/assets/images/profile.jpg">
     <meta property="og:url" content="https://pvandervos.com/blog">
     <meta property="og:type" content="website">
 </head>
@@ -57,10 +69,10 @@
                 </div>
 
                 <div class="space-y-8">
-                    <article class="border-b border-gray-200 dark:border-gray-700 pb-8">
+                    <article class="blog-card border-b border-gray-200 dark:border-gray-700 pb-8" onclick="window.location.href='blog/title2.html'">
                         <div class="mb-4">
                             <h2 class="text-2xl font-bold mb-2">
-                                <a href="blog/title2.html" class="text-gray-900 dark:text-white hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
+                                <a href="blog/title2.html" class="blog-title text-gray-900 dark:text-white transition-colors duration-300">
                                     Title2
                                 </a>
                             </h2>
@@ -71,10 +83,10 @@
                         </p>
                     </article>
 
-                    <article class="border-b border-gray-200 dark:border-gray-700 pb-8">
+                    <article class="blog-card border-b border-gray-200 dark:border-gray-700 pb-8" onclick="window.location.href='blog/title1.html'">
                         <div class="mb-4">
                             <h2 class="text-2xl font-bold mb-2">
-                                <a href="blog/title1.html" class="text-gray-900 dark:text-white hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
+                                <a href="blog/title1.html" class="blog-title text-gray-900 dark:text-white transition-colors duration-300">
                                     Title1
                                 </a>
                             </h2>
