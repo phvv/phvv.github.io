@@ -36,7 +36,7 @@ function loadLayout(mainContent = '') {
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg"><path d="M5.242 13.769L0.5 9.5 12 1l11.5 9-5.242 3.769C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" /></svg>
                             <span class="text-base font-medium">Google Scholar</span>
                         </a>
-                        <a href="https://x.com/_phvv_" target="_blank" rel="noopener noreferrer" title="X (Twitter)" class="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
+                        <a href="https://x.com/PrestonVanderV" target="_blank" rel="noopener noreferrer" title="X (Twitter)" class="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-accent-light dark:hover:text-accent transition-colors duration-300">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>
                             <span class="text-base font-medium">X</span>
                         </a>
